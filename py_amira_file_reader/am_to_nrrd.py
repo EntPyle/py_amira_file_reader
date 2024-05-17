@@ -18,7 +18,7 @@ def escape(value):
     return valstr
 
 def to_csv(csv_data,csv_fname):
-    colnames = csv_data.keys()
+    colnames = tuple(csv_data.keys())
     with open(csv_fname,mode='w') as fd:
         fd.write( ','.join( map(escape, colnames) ) + '\n' )
         idx = 0
@@ -64,7 +64,7 @@ def convert_file(fname,csv_fname,nrrd_fname):
         csv_data['id'].append(this_id)
         csv_data['name'].append(name)
     to_csv(csv_data,csv_fname)
-    nrrd.write(nrrd_fname, arr)
+    nrrd.write(str(nrrd_fname), arr)
 
 def main():
     parser = argparse.ArgumentParser()
